@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Minds - Find Your Perfect Career Match</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4056a1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #4056a1;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: #4056a1;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #344b8a;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #4056a1;
+            border: 1px solid #4056a1;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f0f3ff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 50px 0;
+            background-color: #f0f3ff;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-top: -50px;
+            position: relative;
+        }
+        
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-input {
+            flex: 2;
+            min-width: 200px;
+        }
+        
+        .location-input, .filter-dropdown {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .search-btn {
+            flex: 0 0 auto;
+        }
+        
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 12px 12px 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #4a5568;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #4056a1;
+            box-shadow: 0 0 0 3px rgba(64, 86, 161, 0.2);
+        }
+        
+        .search-button {
+            padding: 12px 25px;
+            background-color: #4056a1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-button:hover {
+            background-color: #344b8a;
+        }
+        
+        /* Filter Tags */
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .filter-tag {
+            background-color: #f0f3ff;
+            color: #4056a1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .filter-tag:hover {
+            background-color: #e1e7ff;
+        }
+        
+        .tag-close {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* Jobs Section */
+        .jobs-section {
+            padding: 50px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+        }
+        
+        .job-count {
+            color: #718096;
+            font-size: 1rem;
+        }
+        
+        .sort-dropdown {
+            padding: 8px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            color: #4a5568;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .job-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .job-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background-color: #f0f3ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #4056a1;
+        }
+        
+        .job-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+        
+        .company-name {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+        
+        .job-details {
+            margin-bottom: 20px;
+        }
+        
+        .job-detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-icon {
+            width: 20px;
+            margin-right: 10px;
+            color: #a0aec0;
+        }
+        
+        .detail-text {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .job-tag {
+            background-color: #f0f3ff;
+            color: #4056a1;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .job-match {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .match-percentage {
+            background-color: #ebfaf5;
+            color: #38b2ac;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .match-text {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .posted-time {
+            color: #a0aec0;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 5px;
+        }
+        
+        .page-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-item.active {
+            background-color: #4056a1;
+            color: white;
+        }
+        
+        .page-item:not(.active):hover {
+            background-color: #f0f3ff;
+            color: #4056a1;
+        }
+        
+        .page-ellipsis {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #4056a1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(64, 86, 161, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .ai-assistant:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(64, 86, 161, 0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .job-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-input, .location-input, .filter-dropdown, .search-btn {
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚡</span>
+                Match Minds
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link">Find Jobs</a>
+                <a href="#" class="nav-link">For Employers</a>
+                <a href="#" class="nav-link">Skill Assessment</a>
+                <a href="#" class="nav-link">Career Resources</a>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-secondary">Login</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Find a Job That Truly Matches Your Skills</h1>
+            <p>Our AI-powered platform matches you with opportunities that align with your proven abilities, not just your resume keywords.</p>
+        </div>
+    </section>
+    
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-section">
+            <form>
+                <div class="search-container">
+                    <div class="search-input">
+                        <div class="input-group">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" class="form-control" placeholder="Job title, skills, or keywords">
+                        </div>
+                    </div>
+                    
+                    <div class="location-input">
+                        <div class="input-group">
+                            <span class="input-icon">📍</span>
+                            <input type="text" class="form-control" placeholder="Location">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-dropdown">
+                        <div class="input-group">
+                            <span class="input-icon">🔧</span>
+                            <select class="form-control">
+                                <option>All Categories</option>
+                                <option>Technology</option>
+                                <option>Design</option>
+                                <option>Marketing</option>
+                                <option>Sales</option>
+                                <option>Customer Service</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="search-btn">
+                        <button type="submit" class="search-button">Search Jobs</button>
+                    </div>
+                </div>
+                
+                <div class="filter-tags">
+                    <div class="filter-tag">Remote <span class="tag-close">✕</span></div>
+                    <div class="filter-tag">Full-time <span class="tag-close">✕</span></div>
+                    <div class="filter-tag">Entry Level <span class="tag-close">✕</span></div>
+                    <div class="filter-tag">Posted within 24 hours <span class="tag-close">✕</span></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Jobs Section -->
+    <section class="jobs-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Recommended Jobs</h2>
+                    <p class="job-count">Based on your skill profile</p>
+                </div>
+                <select class="sort-dropdown">
+                    <option>Sort by: Best Match</option>
+                    <option>Sort by: Latest</option>
+                    <option>Sort by: Salary (high to low)</option>
+                    <option>Sort by: Salary (low to high)</option>
+                </select>
+            </div>
+            
+            <div class="job-cards">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">TechX</div>
+                        <div class="job-info">
+                            <h3>Senior Python Developer</h3>
+                            <p class="company-name">TechX Solutions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$90,000 - $120,000</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Remote (US-based)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Full-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">Python</span>
+                        <span class="job-tag">Django</span>
+                        <span class="job-tag">AI/ML</span>
+                        <span class="job-tag">REST API</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">92% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted 2 days ago</p>
+                </div>
+                
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">DC</div>
+                        <div class="job-info">
+                            <h3>Frontend React Developer</h3>
+                            <p class="company-name">Digital Creatives</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$75,000 - $95,000</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">New York (Hybrid)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Full-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">React</span>
+                        <span class="job-tag">TypeScript</span>
+                        <span class="job-tag">CSS</span>
+                        <span class="job-tag">UI/UX</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">86% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted 5 hours ago</p>
+                </div>
+                
+                <!-- Job Card 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">AI+</div>
+                        <div class="job-info">
+                            <h3>AI/ML Engineer</h3>
+                            <p class="company-name">AI Plus Technologies</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$110,000 - $150,000</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">San Francisco (On-site)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Full-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">Machine Learning</span>
+                        <span class="job-tag">Python</span>
+                        <span class="job-tag">TensorFlow</span>
+                        <span class="job-tag">NLP</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">78% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted 1 week ago</p>
+                </div>
+                
+                <!-- Job Card 4 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">RS</div>
+                        <div class="job-info">
+                            <h3>Rust Backend Developer</h3>
+                            <p class="company-name">RustScale Systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$100,000 - $135,000</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Remote (Worldwide)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Full-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">Rust</span>
+                        <span class="job-tag">Actix Web</span>
+                        <span class="job-tag">Microservices</span>
+                        <span class="job-tag">High Performance</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">94% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted yesterday</p>
+                </div>
+                
+                <!-- Job Card 5 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">GD</div>
+                        <div class="job-info">
+                            <h3>UI/UX Designer</h3>
+                            <p class="company-name">Global Designs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$70,000 - $90,000</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Austin, TX (Hybrid)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Full-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">UI Design</span>
+                        <span class="job-tag">UX Research</span>
+                        <span class="job-tag">Figma</span>
+                        <span class="job-tag">Prototyping</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">72% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted 3 days ago</p>
+                </div>
+                
+                <!-- Job Card 6 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">DL</div>
+                        <div class="job-info">
+                            <h3>Django Developer (Part-time)</h3>
+                            <p class="company-name">Digital Labs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-row">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-text">$40/hour</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Remote (APAC timezone)</span>
+                        </div>
+                        <div class="job-detail-row">
+                            <span class="detail-icon">⏰</span>
+                            <span class="detail-text">Part-time (20hr/week)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        <span class="job-tag">Django</span>
+                        <span class="job-tag">Python</span>
+                        <span class="job-tag">PostgreSQL</span>
+                        <span class="job-tag">API Development</span>
+                    </div>
+                    
+                    <div class="job-match">
+                        <span class="match-percentage">89% Match</span>
+                        <span class="match-text">Based on your skills</span>
+                    </div>
+                    
+                    <p class="posted-time">Posted 4 days ago</p>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="page-item active">1</div>
+                <div class="page-item">2</div>
+                <div class="page-item">3</div>
+                <div class="page-ellipsis">...</div>
+                <div class="page-item">12</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        🤖
+    </div>
+</body>
+</html>

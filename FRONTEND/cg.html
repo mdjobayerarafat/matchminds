@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Growth & Development - Match Minds</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+        }
+        .growth-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-4">Accelerate Your Career Growth</h1>
+            <p class="text-xl mb-8">Personalized career development paths powered by AI insights and industry expertise</p>
+            <button class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                Create Your Growth Plan
+            </button>
+        </div>
+    </header>
+
+    <!-- Career Assessment -->
+    <section class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">Career Assessment & Planning</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Skills Assessment -->
+            <div class="growth-card bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <img src="/api/placeholder/64/64" alt="Skills Assessment" class="rounded"/>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Skills Assessment</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Technical Skills</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full skill-bar" style="width: 78%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Leadership</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full skill-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Communication</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full skill-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full bg-blue-600 text-white py-2 rounded mt-6 hover:bg-blue-700">
+                    Take Assessment
+                </button>
+            </div>
+
+            <!-- Career Path Planning -->
+            <div class="growth-card bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <img src="/api/placeholder/64/64" alt="Career Path" class="rounded"/>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Career Path Planning</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h4 class="font-semibold">Current Role</h4>
+                        <p class="text-sm text-gray-600">Software Developer</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h4 class="font-semibold">Next Step</h4>
+                        <p class="text-sm text-gray-600">Senior Developer</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h4 class="font-semibold">Future Goal</h4>
+                        <p class="text-sm text-gray-600">Technical Lead</p>
+                    </div>
+                </div>
+                <button class="w-full bg-blue-600 text-white py-2 rounded mt-6 hover:bg-blue-700">
+                    Plan Your Path
+                </button>
+            </div>
+
+            <!-- Learning Recommendations -->
+            <div class="growth-card bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <img src="/api/placeholder/64/64" alt="Learning" class="rounded"/>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Learning Recommendations</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Advanced JavaScript Course
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Team Leadership Workshop
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        System Architecture Design
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Agile Project Management
+                    </li>
+                </ul>
+                <button class="w-full bg-blue-600 text-white py-2 rounded mt-6 hover:bg-blue-700">
+                    View All Courses
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Growth Toolkit -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Professional Growth Toolkit</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Skill Development -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Skill Development Tracking</h3>
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <img src="/api/placeholder/640/360" alt="Skill Development Interface" class="rounded-lg"/>
+                    </div>
+                    <ul class="space-y-2 mb-4">
+                        <li>• Progress tracking for each skill</li>
+                        <li>• Personalized learning paths</li>
+                        <li>• Industry benchmark comparisons</li>
+                        <li>• Certification recommendations</li>
+                    </ul>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                        Track Your Progress
+                    </button>
+                </div>
+
+                <!-- Mentorship Connection -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Mentorship Connection</h3>
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <img src="/api/placeholder/640/360" alt="Mentorship Interface" class="rounded-lg"/>
+                    </div>
+                    <ul class="space-y-2 mb-4">
+                        <li>• Connect with industry experts</li>
+                        <li>• Schedule mentoring sessions</li>
+                        <li>• Get career guidance</li>
+                        <li>• Build professional networks</li>
+                    </ul>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                        Find a Mentor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Resources -->
+    <section class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">Career Resources</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Industry Insights -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Industry Insights</h3>
+                <ul class="space-y-3">
+                    <li>• Market trends analysis</li>
+                    <li>• Salary benchmarking</li>
+                    <li>• Industry reports</li>
+                    <li>• Growth opportunities</li>
+                    <li>• Future skills demand</li>
+                </ul>
+            </div>
+
+            <!-- Professional Development -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Development Resources</h3>
+                <ul class="space-y-3">
+                    <li>• Online courses library</li>
+                    <li>• Certification programs</li>
+                    <li>• Workshop schedules</li>
+                    <li>• Webinar recordings</li>
+                    <li>• Practice exercises</li>
+                </ul>
+            </div>
+
+            <!-- Networking -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Networking</h3>
+                <ul class="space-y-3">
+                    <li>• Professional events</li>
+                    <li>• Industry meetups</li>
+                    <li>• Community forums</li>
+                    <li>• Expert connections</li>
+                    <li>• Collaboration opportunities</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Success Stories</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <img src="/api/placeholder/100/100" alt="Profile 1" class="rounded-full mx-auto mb-4"/>
+                    <h4 class="text-lg font-semibold mb-2">Sarah Chen</h4>
+                    <p class="text-gray-600 mb-4">From Junior Developer to Tech Lead in 2 years</p>
+                    <p class="text-sm">"The career planning tools helped me identify and close skill gaps strategically."</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <img src="/api/placeholder/100/100" alt="Profile 2" class="rounded-full mx-auto mb-4"/>
+                    <h4 class="text-lg font-semibold mb-2">Mike Johnson</h4>
+                    <p class="text-gray-600 mb-4">Successfully transitioned to Product Management</p>
+                    <p class="text-sm">"The mentorship program was invaluable in helping me switch careers."</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <img src="/api/placeholder/100/100" alt="Profile 3" class="rounded-full mx-auto mb-4"/>
+                    <h4 class="text-lg font-semibold mb-2">Lisa Patel</h4>
+                    <p class="text-gray-600 mb-4">Doubled salary with strategic skill development</p>
+                    <p class="text-sm">"The personalized learning path helped me focus on high-impact skills."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Accelerate Your Career?</h2>
+            <p class="text-xl mb-8">Start your personalized career development journey today</p>
+            <button class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                Get Started Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Match Minds</h4>
+                    <p class="text-gray-400">Your career growth partner</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Assessment Tools</li>
+                        <li>Learning Paths</li>
+                        <li>Mentorship</li>
+                        <li>Career Planning</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Community</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Success Stories</li>
+                        <li>Events</li>
+                        <li>Blog</li>
+                        <li>Forums</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Help Center</li>
+                        <li>Contact Us</li>
+                        <li>FAQ</li>
+                        <li>Terms of Service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

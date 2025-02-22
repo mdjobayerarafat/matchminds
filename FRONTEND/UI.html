@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerMatch AI - Dashboard</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --gray-light: #e2e8f0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f1f5f9;
+      color: var(--dark);
+    }
+    
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background-color: white;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    
+    .logo {
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .logo img {
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+    }
+    
+    .logo-text {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary-dark);
+    }
+    
+    .nav-menu {
+      padding: 20px 0;
+    }
+    
+    .nav-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .nav-item.active {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: var(--primary);
+    }
+    
+    .nav-icon {
+      margin-right: 12px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    .nav-item:hover:not(.active) {
+      background-color: var(--gray-light);
+    }
+    
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .greeting h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .greeting p {
+      color: var(--gray);
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .search-box {
+      position: relative;
+    }
+    
+    .search-input {
+      padding: 10px 16px 10px 42px;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      width: 260px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s;
+    }
+    
+    .search-input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+    }
+    
+    .profile-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    
+    .profile-menu:hover {
+      background-color: var(--gray-light);
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .notification-badge {
+      position: relative;
+    }
+    
+    .notification-badge::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 8px;
+      height: 8px;
+      background-color: var(--danger);
+      border-radius: 50%;
+    }
+    
+    .bell-icon {
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .bell-icon:hover {
+      background-color: var(--gray-light);
+    }
+    
+    /* Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    
+    .dashboard-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      padding: 24px;
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--gray-light);
+      color: var(--dark);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--gray-light);
+    }
+    
+    /* Job Cards */
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .job-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--gray-light);
+      transition: all 0.3s;
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+    }
+    
+    .job-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    
+    .company-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 20px;
+    }
+    
+    .job-info {
+      flex: 1;
+    }
+    
+    .job-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    
+    .company-name {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .job-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .job-match {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    
+    .match-score {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--success);
+    }
+    
+    .match-label {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    
+    /* Profile Card */
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .profile-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    
+    .profile-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .profile-headline {
+      color: var(--gray);
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+    
+    .profile-completion {
+      width: 100%;
+      margin: 16px 0;
+    }
+    
+    .completion-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: var(--gray-light);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: var(--success);
+      width: 85%;
+    }
+    
+    /* Stats cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .stat-card {
+      padding: 16px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: rgba(59, 130, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--gray);
+    }
+    
+    /* AI Assistant */
+    .ai-assistant {
+      background-color: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    
+    .assistant-icon {
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #0ea5e9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .assistant-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #0c4a6e;
+    }
+    
+    .assistant-content p {
+      font-size: 14px;
+      color: #0c4a6e;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    
+    .interview-prep-card {
+      border-left: 4px solid var(--primary);
+    }
+    
+    /* Activity feed */
+    .activity-feed {
+      padding: 0;
+    }
+    
+    .activity-header {
+      padding: 0 24px 12px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .activity-list {
+      padding: 12px 24px;
+    }
+    
+    .activity-item {
+      display: flex;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-light);
+      gap: 12px;
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(59, 130, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+    
+    .activity-icon.interview {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+    
+    .activity-icon.application {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+    
+    .activity-content {
+      flex: 1;
+    }
+    
+    .activity-text {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .activity-time {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .skill-tag {
+      padding: 6px 12px;
+      background-color: #f1f5f9;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    /* Interview Prep */
+    .prep-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+    
+    .prep-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 33%;
+    }
+    
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .step-title {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span style="color: var(--primary); font-size: 24px;">⚡</span>
+        <span class="logo-text">CareerMatch AI</span>
+      </div>
+      
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active">
+          <span class="nav-icon">📊</span>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">👤</span>
+          My Profile
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📝</span>
+          CV Manager
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">🔍</span>
+          Job Search
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📱</span>
+          Applications
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">🎯</span>
+          Interview Prep
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📈</span>
+          Career Growth
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          Settings
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- AI Assistant Notice -->
+      <div class="ai-assistant">
+        <div class="assistant-icon">🤖</div>
+        <div class="assistant-content">
+          <h3>AI Career Assistant</h3>
+          <p>Your interview with <strong>TechVision Inc.</strong> is scheduled for tomorrow at 2:00 PM. Based on your profile and the job requirements, I've prepared personalized interview questions and talking points.</p>
+          <button class="btn btn-primary">Prepare Now</button>
+        </div>
+      </div>
+      
+      <!-- Header -->
+      <header class="header">
+        <div class="greeting">
+          <h1>Welcome back, Alex!</h1>
+          <p>You have 3 new job matches and 1 pending interview.</p>
+        </div>
+        
+        <div class="header-actions">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search jobs, companies...">
+          </div>
+          
+          <div class="notification-badge bell-icon">
+            🔔
+          </div>
+          
+          <div class="profile-menu">
+            <div class="avatar">A</div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Left Column -->
+        <div class="dashboard-column">
+          <!-- Matched Jobs -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">AI-Matched Jobs (92% Fit)</h2>
+              <div class="card-actions">
+                <button class="btn btn-outline">Filters</button>
+                <button class="btn btn-primary">View All</button>
+              </div>
+            </div>
+            
+            <div class="job-list">
+              <!-- Job 1 -->
+              <div class="job-card">
+                <div class="company-logo">TL</div>
+                <div class="job-info">
+                  <h3 class="job-title">Senior Frontend Developer</h3>
+                  <div class="company-name">TechLabs Inc.</div>
+                  <div class="job-meta">
+                    <span class="meta-item">💼 Remote</span>
+                    <span class="meta-item">💰 $90k - $120k</span>
+                    <span class="meta-item">⏱️ Posted 2 days ago</span>
+                  </div>
+                </div>
+                <div class="job-match">
+                  <div class="match-score">98%</div>
+                  <div class="match-label">match</div>
+                </div>
+              </div>
+              
+              <!-- Job 2 -->
+              <div class="job-card">
+                <div class="company-logo">ID</div>
+                <div class="job-info">
+                  <h3 class="job-title">UX/UI Designer</h3>
+                  <div class="company-name">InnovateDigi</div>
+                  <div class="job-meta">
+                    <span class="meta-item">💼 Hybrid</span>
+                    <span class="meta-item">💰 $80k - $95k</span>
+                    <span class="meta-item">⏱️ Posted 3 days ago</span>
+                  </div>
+                </div>
+                <div class="job-match">
+                  <div class="match-score">95%</div>
+                  <div class="match-label">match</div>
+                </div>
+              </div>
+              
+              <!-- Job 3 -->
+              <div class="job-card">
+                <div class="company-logo">VS</div>
+                <div class="job-info">
+                  <h3 class="job-title">Product Designer</h3>
+                  <div class="company-name">VisionScale</div>
+                  <div class="job-meta">
+                    <span class="meta-item">💼 On-site</span>
+                    <span class="meta-item">💰 $85k - $110k</span>
+                    <span class="meta-item">⏱️ Posted 1 week ago</span>
+                  </div>
+                </div>
+                <div class="job-match">
+                  <div class="match-score">92%</div>
+                  <div class="match-label">match</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Interview Preparation -->
+          <div class="card interview-prep-card">
+            <div class="card-header">
+              <h2 class="card-title">Interview Preparation</h2>
+              <div class="card-actions">
+                <button class="btn btn-primary">Start Practice</button>
+              </div>
+            </div>
+            
+            <p>Your next interview is with <strong>TechVision Inc.</strong> for the <strong>Senior UX Designer</strong> position on <strong>Feb 22, 2025</strong>.</p>
+            
+            <div class="prep-steps">
+              <div class="prep-step">
+                <div class="step-number">1</div>
+                <div class="step-title">AI Mock Interview</div>
+              </div>
+              <div class="prep-step">
+                <div class="step-number">2</div>
+                <div class="step-title">Feedback & Analysis</div>
+              </div>
+              <div class="prep-step">
+                <div class="step-number">3</div>
+                <div class="step-title">Practice Improvements</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CV Analysis -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">AI CV Analysis</h2>
+              <div class="card-actions">
+                <button class="btn btn-primary">Improve CV</button>
+              </div>
+            </div>
+            
+            <p>Based on your target roles, here are some suggestions to strengthen your CV:</p>
+            
+            <div class="skill-tags">
+              <div class="skill-tag">Add more UX portfolio links</div>
+              <div class="skill-tag">Highlight design system experience</div>
+              <div class="skill-tag">Quantify project outcomes</div>
+              <div class="skill-tag">Add mobile design projects</div>
+              <div class="skill-tag">Include collaboration tools</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="dashboard-column">
+          <!-- Profile Card -->
+          <div class="card profile-card">
+            <div class="profile-avatar">A</div>
+            <h3 class="profile-name">Alex Morgan</h3>
+            <p class="profile-headline">Senior UX/UI Designer</p>
+            
+            <button class="btn btn-outline">Edit Profile</button>
+            
+            <div class="profile-completion">
+              <div class="completion-label">
+                <span>Profile Strength</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">👁️</div>
+              <div class="stat-value">34</div>
+              <div class="stat-label">Profile Views</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">📑</div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Applications</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">🔄</div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Interview Invites</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">⭐</div>
+              <div class="stat-value">87%</div>
+              <div class="stat-label">AI Match Score</div>
+            </div>
+          </div>
+          
+          <!-- Activity Feed -->
+          <div class="card activity-feed">
+            <div class="activity-header">
+              <h2 class="card-title">Recent Activity</h2>
+            </div>
+            
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon interview">📅</div>
+                <div class="activity-content">
+                  <div class="activity-text">Interview scheduled with <strong>TechVision Inc.</strong></div>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </div>
+              
+              <div class="activity-item">
+                <div class="activity-icon application">📤</div>
+                <div class="activity-content">
+                  <div class="activity-text">Applied to <strong>UX Lead</strong> at <strong>InnovateDigi</strong></div>
+                  <div class="activity-time">Yesterday</div>
+                </div>
+              </div>
+              
+              <div class="activity-item">
+                <div class="activity-icon">👍</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>VisionScale</strong> viewed your profile</div>
+                  <div class="activity-time">2 days ago</div>
+                </div>
+              </div>
+              
+              <div class="activity-item">
+                <div class="activity-icon">🤖</div>
+                <div class="activity-content">
+                  <div class="activity-text">AI suggested 3 CV improvements</div>
+                  <div class="activity-time">3 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

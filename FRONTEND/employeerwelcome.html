@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Match Minds | Employer Dashboard</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #4f46e5;
+      --accent: #8b5cf6;
+      --light: #f3f4f6;
+      --dark: #1f2937;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    body {
+      background-color: #f9fafb;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    header {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+    
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    
+    .hero {
+      padding: 3rem 0;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-image {
+      background-image: url('/api/placeholder/500/350');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      height: 350px;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    
+    .cta-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: white;
+      color: var(--primary);
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.2s, color 0.2s;
+      border: 1px solid var(--primary);
+      margin-left: 1rem;
+    }
+    
+    .secondary-button:hover {
+      background-color: var(--light);
+    }
+    
+    .features {
+      padding: 4rem 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background-color: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--dark);
+    }
+    
+    .feature-card p {
+      color: #6b7280;
+    }
+    
+    .get-started {
+      padding: 4rem 0;
+      background-color: #f3f4f6;
+    }
+    
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .step-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+    
+    .step-card h3 {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .step-card p {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+    
+    .step-card a {
+      display: inline-flex;
+      align-items: center;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    
+    .step-card a:hover {
+      text-decoration: underline;
+    }
+    
+    .testimonials {
+      padding: 4rem 0;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .testimonial-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .testimonial-rating {
+      color: #f59e0b;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.25rem;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .author-info h4 {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .author-info p {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+    
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-logo-icon {
+      width: 32px;
+      height: 32px;
+      background-color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    .footer-description {
+      color: #d1d5db;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: background-color 0.2s;
+    }
+    
+    .social-icon:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-image {
+        height: 250px;
+        order: -1;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <span class="logo-icon">MM</span>
+        <span>Match Minds</span>
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Job Listings</a></li>
+          <li><a href="#">Candidates</a></li>
+          <li><a href="#">Reports</a></li>
+        </ul>
+      </nav>
+      
+      <div class="user-menu">
+        <div class="user-avatar">AC</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Welcome to your smarter hiring future</h1>
+        <p>Match Minds helps you find the perfect candidates based on skills and potential, not just keywords on a resume. Let's transform how you discover talent.</p>
+        <a href="#" class="cta-button">Post Your First Job</a>
+        <a href="#" class="secondary-button">Watch Demo</a>
+      </div>
+      <div class="hero-image"></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Discover What Match Minds Can Do</h2>
+        <p>Our AI-powered platform streamlines your hiring process from start to finish</p>
+      </div>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">AI</div>
+          <h3>AI-Powered Matching</h3>
+          <p>Our advanced algorithms understand role requirements and match them with candidates' proven skills, not just keywords on their resume.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">BP</div>
+          <h3>Bias-Free Screening</h3>
+          <p>Every candidate gets evaluated using the same fair criteria, helping you build a more diverse and talented workforce.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">SA</div>
+          <h3>Skill Assessments</h3>
+          <p>Go beyond the resume with hands-on skill assessments that show what candidates can actually do, not just what they claim.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">RH</div>
+          <h3>Remote Hiring</h3>
+          <p>Interview and hire candidates from anywhere in the world, expanding your talent pool beyond geographic limitations.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">RT</div>
+          <h3>Real-Time Updates</h3>
+          <p>Stay in the loop throughout the entire hiring process with instant notifications and status updates.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">DA</div>
+          <h3>Data Analytics</h3>
+          <p>Gain insights into your hiring process with comprehensive analytics that help you optimize and improve over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <section class="get-started">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get Started in Three Simple Steps</h2>
+        <p>Setting up your employer profile and posting your first job is quick and easy</p>
+      </div>
+      
+      <div class="steps-container">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Complete Your Profile</h3>
+          <p>Add your company details, culture information, and what makes your workplace special.</p>
+          <a href="#">Start Your Profile →</a>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Create a Job Listing</h3>
+          <p>Describe the role, required skills, and what success looks like in this position.</p>
+          <a href="#">Post a Job →</a>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Review AI Matches</h3>
+          <p>Our AI will find and rank candidates based on their proven skills and compatibility.</p>
+          <a href="#">View Demo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Employers Are Saying</h2>
+        <p>Join hundreds of companies that have transformed their hiring process</p>
+      </div>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-rating">★★★★★</div>
+          <p class="testimonial-text">"Match Minds cut our time-to-hire by 40% and helped us find amazing talent we would have missed with our old process. The AI matching is eerily accurate."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SK</div>
+            <div class="author-info">
+              <h4>Sarah Kim</h4>
+              <p>HR Director, TechGrowth Inc.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-rating">★★★★★</div>
+          <p class="testimonial-text">"The skill assessments feature is a game-changer. We've been able to identify candidates with the right abilities rather than just impressive resumes."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RJ</div>
+            <div class="author-info">
+              <h4>Raj Patel</h4>
+              <p>Talent Acquisition, Global Solutions</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-rating">★★★★★</div>
+          <p class="testimonial-text">"Since implementing Match Minds, our workforce diversity has improved significantly. The bias-free screening really works as advertised."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ML</div>
+            <div class="author-info">
+              <h4>Maria Lopez</h4>
+              <p>CEO, Innovative Startup</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <span class="footer-logo-icon">MM</span>
+            <span>Match Minds</span>
+          </div>
+          <p class="footer-description">We're revolutionizing how companies find talent and how job seekers showcase their abilities. Join us in creating a more fair, efficient hiring ecosystem.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">t</a>
+            <a href="#" class="social-icon">ig</a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Enterprise</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Guides</a></li>
+            <li><a href="#">Success Stories</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 Match Minds. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
