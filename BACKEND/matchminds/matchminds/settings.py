@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'users',
+
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,10 @@ TEMPLATES = [
         },
     },
 ]
-
+AUTHENTICATION_BACKENDS = [
+     'users.backends.EmailBackend',  # Custom backend
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+]
 WSGI_APPLICATION = 'matchminds.wsgi.application'
 
 
